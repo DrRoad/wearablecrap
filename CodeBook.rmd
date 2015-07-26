@@ -1,0 +1,125 @@
+---
+title: "CodeBook"
+author: "YoursTruly"
+date: "July 26, 2015"
+output: html_document
+---
+
+  The variable names used in the original data set are descriptive and easy to understand once the nomenclature is understood.
+For this reason and in order to maintain continuity the variable names were retained. Refer to the following naming conventions 
+for info about a particular variable, what it describes, and how it was derived.
+
+    All data originates from one of two basic sources, accelerometer and gyroscoping sensors using 3 axis X, Y, and Z.
+    was further divided into the sub groups Body and Gravity. The body linear acceleration and angular
+    velocity were derived in time (t) to obtain Jerk signals, denoted by Jerk. Magnitudes of the 3 dimensional signals were
+    calculated using euclidian norms and denoted with Mag. To some of the signals a Fast Fourier Transform (FFT) was applied,
+    they are marked with a preceding f. The means and standard deviations were also calculated and presented as variables.
+                          Acc     :  Data originating from accelerometer
+                          Gyro    :  Data originating from gyroscope
+                          Body    :  Body linear acceleration
+                          Gravity :  Gravitational acceleration
+                          Jerk    :  Time derived acceleration and angular velocity
+                          Mag     :  Magnitudes of signals
+                          f       :  Variable derived by FFT
+                          t       :  Variable measured in the time domain
+                          mean()  :  Mean of given variable
+                          std()   :  Standard Deviation of given variable
+                          X,Y,Z   :  Axis on which variable was measured
+                          activity:  Name of activity performed during measurements
+                          subject :  Subject performing actiions
+
+    The following is a list of all included variables. See above key to variable type/origination.
+    
+activity
+subject  
+tBodyAcc-mean()-X     
+tBodyAcc-mean()-Y     
+tBodyAcc-mean()-Z     
+tBodyAcc-std()-X          
+tBodyAcc-std()-Y          
+tBodyAcc-std()-Z          
+tGravityAcc-mean()-X      
+tGravityAcc-mean()-Y      
+tGravityAcc-mean()-Z      
+tGravityAcc-std()-X        
+tGravityAcc-std()-Y       
+tGravityAcc-std()-Z       
+tBodyAccJerk-mean()-X     
+tBodyAccJerk-mean()-Y     
+tBodyAccJerk-mean()-Z     
+tBodyAccJerk-std()-X      
+tBodyAccJerk-std()-Y      
+tBodyAccJerk-std()-Z      
+tBodyGyro-mean()-X        
+tBodyGyro-mean()-Y        
+tBodyGyro-mean()-Z        
+tBodyGyro-std()-X        
+tBodyGyro-std()-Y        
+tBodyGyro-std()-Z        
+tBodyGyroJerk-mean()-X        
+tBodyGyroJerk-mean()-Y        
+tBodyGyroJerk-mean()-Z        
+tBodyGyroJerk-std()-X        
+tBodyGyroJerk-std()-Y        
+tBodyGyroJerk-std()-Z        
+tBodyAccMag-mean()       
+tBodyAccMag-std()        
+tGravityAccMag-mean()      
+tGravityAccMag-std()      
+tBodyAccJerkMag-mean()      
+tBodyAccJerkMag-std()      
+tBodyGyroMag-mean()        
+tBodyGyroMag-std()        
+tBodyGyroJerkMag-mean()        
+tBodyGyroJerkMag-std()        
+fBodyAcc-mean()-X      
+fBodyAcc-mean()-Y      
+fBodyAcc-mean()-Z      
+fBodyAcc-std()-X      
+fBodyAcc-std()-Y      
+fBodyAcc-std()-Z      
+fBodyAccJerk-mean()-X      
+fBodyAccJerk-mean()-Y      
+fBodyAccJerk-mean()-Z      
+fBodyAccJerk-std()-X      
+fBodyAccJerk-std()-Y      
+fBodyAccJerk-std()-Z      
+fBodyGyro-mean()-X        
+fBodyGyro-mean()-Y        
+fBodyGyro-mean()-Z        
+fBodyGyro-std()-X        
+fBodyGyro-std()-Y        
+fBodyGyro-std()-Z        
+fBodyAccMag-mean()      
+fBodyAccMag-std()      
+fBodyBodyAccJerkMag-mean()      
+fBodyBodyAccJerkMag-std()      
+fBodyBodyGyroMag-mean()        
+fBodyBodyGyroMag-std()        
+fBodyBodyGyroJerkMag-mean()        
+fBodyBodyGyroJerkMag-std()       
+
+run_analysis.R walk through
+1> set workspace.
+2> load applicable packages, dplyr and data.table
+3> create function 'make_list' for later use making a list to subset with. Subset will be using select from dplyr so list must
+   be formatted to select prerequisites. A named list that can also be referenced numerically
+4> create list of labels from file
+5> create list of activities from file
+6> create a combined data set of X Y and Z variables from all 3 'test' data files
+7> apply column numbers for later use in binding
+8> create a combined data set of X Y and Z variables from all 3 'training' data files
+9> apply column numbers for later use in binding
+10>bind test and training data in a single data set and apply the labels generated with make_list
+11>do some housekeeping
+12>create data.table for later use as tidy data table
+13>start 30 iteration loop, one for each subject
+14>create tmp file for storing tidy data
+15>start 6 iteration loop to catch each activity for each subject
+16>sumarise wide set into tidy set, assign to tmp
+17>assign activity names to tidy data set
+18>add rows to tidy data set
+19>start six iteration loop to add activity names to wide data set
+20>add activity names using := in dplyr
+21>clean up, pack up, go home.
+
